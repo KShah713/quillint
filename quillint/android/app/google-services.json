@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "642072880655",
+    "project_id": "quillint-42dc6",
+    "storage_bucket": "quillint-42dc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642072880655:android:7c00e5ab22f623b30ea57a",
+        "android_client_info": {
+          "package_name": "com.aeshi.quillint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642072880655-urmbh595ug0r5m7gui5749id60p6n591.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aeshi.quillint",
+            "certificate_hash": "604e847f079a7e312465dea8c033c154469b2ead"
+          }
+        },
+        {
+          "client_id": "642072880655-f22fe0hkg7g1jtej61ggg0tseihbusk0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAIaBvUsnUow_C_UpdinyAiQnLGvPybIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642072880655-f22fe0hkg7g1jtej61ggg0tseihbusk0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
