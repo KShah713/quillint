@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+        padding: EdgeInsets.symmetric( horizontal: 50),
         child: Form(
           key: _formKey,
           child: Column(
@@ -71,18 +71,19 @@ class _SignUpState extends State<SignUp> {
               ),
               SizedBox(height: 15),
               ElevatedButton(
-                
                 onPressed: () async {
                   // this if statement is true if the validators return null instead of a string
                   if (_formKey.currentState.validate()) {
                     dynamic result =
                         _auth.signUpWithEmailPassword(email, password);
-                    if (result == null) {
-                      setState(() {
-                        error = 'Enter a valid email ID';
-                        print(error);
-                      });
-                    }
+                    result.then((res) {
+                      if (result == null) {
+                        setState(() {
+                          error = 'Enter a valid email ID';
+                          print(error);
+                        });
+                      }
+                    });
                   }
                 },
                 child: Text(

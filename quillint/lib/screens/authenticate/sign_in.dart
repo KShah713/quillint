@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quillint/services/auth.dart';
 
 class SignIn extends StatefulWidget {
-
   final Function toggleView;
   SignIn({this.toggleView});
 
@@ -11,6 +10,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final _formKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
 
   // text field state
@@ -18,6 +18,8 @@ class _SignInState extends State<SignIn> {
 
   //password field state
   String password = '';
+
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +40,16 @@ class _SignInState extends State<SignIn> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+        padding: EdgeInsets.symmetric(horizontal: 50),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               SizedBox(
                 height: 20,
               ),
               TextFormField(
+                validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() {
                     email = val;
@@ -56,23 +60,41 @@ class _SignInState extends State<SignIn> {
                 height: 20,
               ),
               TextFormField(
+                validator: (val) => val.isEmpty ? 'Enter a password' : null,
                 obscureText: true,
                 onChanged: (val) {
                   password = val;
                 },
               ),
               SizedBox(height: 20),
-              RaisedButton(
-                color: Colors.amber[600],
+              ElevatedButton(
                 onPressed: () async {
-                  print(email);
-                  print(password);
+                  if (_formKey.currentState.validate()) {
+                    print('valid');
+                    dynamic result = await _auth.signInWithEmailPassword(email, password);
+                    result.then((res) {
+                      if (result == null) {
+                        setState(() {
+                          error = 'Could not Sign In with those Credentials';
+                          print(error);
+                        });
+                      }
+                    });
+                  }
                 },
                 child: Text(
                   'Sign In',
                   style: TextStyle(
                     color: Colors.black,
                   ),
+                ),
+              ),
+              SizedBox(height: 7),
+              Text(
+                error,
+                style: TextStyle(
+                  color: Colors.red,
+                  height: 14,
                 ),
               ),
             ],
