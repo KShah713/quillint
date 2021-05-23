@@ -41,66 +41,70 @@ class _SignInState extends State<SignIn> {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 50),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                validator: (val) => val.isEmpty ? 'Enter an email' : null,
-                onChanged: (val) {
-                  setState(() {
-                    email = val;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                validator: (val) => val.isEmpty ? 'Enter a password' : null,
-                obscureText: true,
-                onChanged: (val) {
-                  password = val;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState.validate()) {
-                    print('valid');
-                    dynamic result = await _auth.signInWithEmailPassword(email, password);
-                    result.then((res) {
-                      if (result == null) {
-                        setState(() {
-                          error = 'Could not Sign In with those Credentials';
-                          print(error);
-                        });
-                      }
+       
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      email = val;
                     });
-                  }
-                },
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                    color: Colors.black,
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  validator: (val) => val.isEmpty ? 'Enter a password' : null,
+                  obscureText: true,
+                  onChanged: (val) {
+                    password = val;
+                  },
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      print('valid');
+
+                      await _auth
+                          .signInWithEmailPassword(email, password)
+                          .then((res) {
+                        if (res == null) {
+                          setState(() {
+                            error = 'Could not Sign In with those Credentials';
+                            print(error);
+                          });
+                        }
+                      });
+                    }
+                  },
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 7),
-              Text(
-                error,
-                style: TextStyle(
-                  color: Colors.red,
-                  height: 14,
+                SizedBox(height: 7),
+                Text(
+                  error,
+                  style: TextStyle(
+                    color: Colors.red,
+                    height: 14,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+  
     );
   }
 }

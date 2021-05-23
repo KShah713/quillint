@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric( horizontal: 50),
+        padding: EdgeInsets.symmetric(horizontal: 50),
         child: Form(
           key: _formKey,
           child: Column(
